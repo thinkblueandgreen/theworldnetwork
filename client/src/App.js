@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 
 import Footer from './components/Footer.js';
-//import Cards from './components/Cards.js';
-import API from './utils/API';
+import Cards from './components/Cards.js';
+import API from './utils/API.js';
 import NewsList from './components/Newslist';
 
 function App() {
@@ -11,10 +11,21 @@ function App() {
 
    const [news, setNews] = useState({ news: [] });
    const [newsList, setNewsList] = useState({ newsList: [] });
+   const [categories, setCategories] = useState({ categories: {
+                     business:[],
+                     general: [],
+                     entertainment: [],
+                     sports: [],
+                     health: [],
+                     science: [],
+                     technology: []
+                  }});
 
 
    useEffect(() => {
       getNews_();
+      getCategories();
+     // getNews_();
    }, [newsList])
 
 
@@ -24,6 +35,26 @@ function App() {
       })
    }
 
+   const getCategories = ()=>{
+      let categories_ = {
+         business:[],
+         general: [],
+         entertainment: [],
+         sports: [],
+         health: [],
+         science: [],
+         technology: []
+      };
+      API.getHeadlines().then(data=>{
+         data.data.sources.map(article=>{
+            let cat = article.category;
+            //categories[cat].push({desc:article.description, url:article.url});
+            categories_[cat].push({desc:article.description, url:article.url});
+         })
+         setCategories({categories:categories_});
+         //console.log(JSON.stringify(categories_));
+      })
+   }
 
    const handleClick = (e) => {
       console.log(e.target.id);
@@ -80,6 +111,7 @@ function App() {
          <NewsList list={news} />
 
          {/* cards will go here */}
+         <Cards list={categories} />
 
          <Footer></Footer>
 
