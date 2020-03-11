@@ -5,10 +5,19 @@ import axios from "axios";
 export default {
   getNews: function (query) {
     return axios.get(`
-      http://newsapi.org/v2/top-headlines?country=us${query}&pageSize=100&apiKey=762b66aa0a224c9784f486b5e8720eff
+      http://newsapi.org/v2/top-headlines?country=us${query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e
      `);
   },
   getHeadlines: function(){
-    return axios.get(`http://newsapi.org/v2/sources?apiKey=762b66aa0a224c9784f486b5e8720eff`)
+    return axios.get(`http://newsapi.org/v2/sources?apiKey=9d292aa6de19468c902a5695b2d3a89e`)
+  },
+  getPolls: function(category){
+    return axios.get(`/api/polls/` + category)
+  },
+  logIn: function(params){
+    return axios.post('/api/login')
+  },
+  signUp: function(params){
+    return axios.post('/api/signup')
   }
 };

@@ -1,3 +1,11 @@
+const Categories = require("./category")
+
+
+module.exports = Categories
+
+//sary's addition down below
+
 module.exports = {
-  Recipe: require("./news")
-};
+    News: require("./news"),
+    User: require('./user')
+  };

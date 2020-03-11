@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-
+const passport = require('passport');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const apiRoutes = require("./routes/apiRoutes");
@@ -15,10 +15,21 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/pollingapp",
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+);
+
+
+//Sary's passport code is bellow. 
+
 // mongoose.connect(
 //   process.env.MONGODB_URI || "mongodb://localhost/reactnews",
 //   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 // );
+
+// app.use(passport.initialize())
+// app.use(passport.session()) 
 
 // Use apiRoutes
 app.use("/api", apiRoutes);

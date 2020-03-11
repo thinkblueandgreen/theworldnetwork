@@ -1,6 +1,6 @@
 import React from 'react';
 // import "./footer.css";
-import { Row } from 'react-bootstrap';
+// import { Row } from 'react-bootstrap';
 
 function Footer() {
     return (

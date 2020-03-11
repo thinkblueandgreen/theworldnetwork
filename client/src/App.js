@@ -1,122 +1,134 @@
+import React, { useState, useEffect } from "react";
 
-import React, { useState, useEffect } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Footer from './components/Footer.js';
-import Cards from './components/Cards.js';
-import API from './utils/API.js';
-import NewsList from './components/Newslist';
+import Navbar from "./components/Navbar.js";
+import Form from './components/Form';
+import API from "./utils/API";
+import Pollscard from "./components/Pollscard";
+import tech from "./assets/tech.json";
+import NewsList from "./components/Newslist";
+import Cards from "./components/Cards";
+import Footer from "./components/Footer";
 
-function App() {
+const App = function () {
 
+    const [categorypolls, setCategorypolls] = useState("politics")
+    const [catPoll, setCatPoll] = useState({ catPoll: [] })
+    const [newsList, setNewsList] = useState({ newsList: [] })
+    const [news, setNews] = useState({ news: [] })
+    const [categories, setCategories] = useState({
+        categories: {
+            business: [],
+            general: [],
+            entertainment: [],
+            sports: [],
+            health: [],
+            science: [],
+            technology: []
+        }
+    });
 
-   const [news, setNews] = useState({ news: [] });
-   const [newsList, setNewsList] = useState({ newsList: [] });
-   const [categories, setCategories] = useState({ categories: {
-                     business:[],
-                     general: [],
-                     entertainment: [],
-                     sports: [],
-                     health: [],
-                     science: [],
-                     technology: []
-                  }});
+    useEffect(() => {
+        getPolls(categorypolls)
+        getNews_()
+    }, [categorypolls])
 
-
-   useEffect(() => {
-      getNews_();
-      getCategories();
-     // getNews_();
-   }, [newsList])
-
-
-   const getNews_ = (param) => {
-      API.getNews(param || '').then(data => {
-         setNews({ news: data.data.articles })
-      })
-   }
-
-   const getCategories = ()=>{
-      let categories_ = {
-         business:[],
-         general: [],
-         entertainment: [],
-         sports: [],
-         health: [],
-         science: [],
-         technology: []
-      };
-      API.getHeadlines().then(data=>{
-         data.data.sources.map(article=>{
-            let cat = article.category;
-            //categories[cat].push({desc:article.description, url:article.url});
-            categories_[cat].push({desc:article.description, url:article.url});
-         })
-         setCategories({categories:categories_});
-         //console.log(JSON.stringify(categories_));
-      })
-   }
-
-   const handleClick = (e) => {
-      console.log(e.target.id);
-      getNews_(`&category=${e.target.id}`)
-   };
-
-   return (
-      <div>
-         <div className="text-center sticky-top" style={{ color: "black", fontSize: "30px" }}><a className="page-top" href="#">THE WORLD NETWORK  </a></div>
-
-         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-               <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" >
-               <ul className="navbar-nav mr-auto" id="navigationItems">
-
-                  <li className="nav-item">
-                     <a className="nav-link" onClick={(e) => handleClick(e)} id="technology" href="#">Technology</a>
-                  </li>
-                  <li className="nav-item">
-                     <a className="nav-link" onClick={(e) => handleClick(e)} id="sports" href="#">Sports</a>
-                  </li>
-                  <li className="nav-item">
-                     <a className="nav-link" onClick={(e) => handleClick(e)} id="science" href="#">Science</a>
-                  </li>
-                  <li className="nav-item">
-                     <a className="nav-link" onClick={(e) => handleClick(e)} id="finance" href="#">Finance</a>
-                  </li>
-                  <li className="nav-item">
-                     <a className="nav-link" onClick={(e) => handleClick(e)} id="health" href="#">Health</a>
-                  </li>
-                  <li className="nav-item">
-                     <a className="nav-link" onClick={(e) => handleClick(e)} id="business" href="#">Business</a>
-                  </li>
-                  <li className="nav-item">
-                     <a className="nav-link" onClick={(e) => handleClick(e)} id="entertainment" href="#">Entertainment</a>
-                  </li>
-               </ul>
-
-               <form className="form-inline">
-                  <button className="btn btn-primary my-2 my-sm-0 ml-auto ">Sign in</button>
-                  <button className="btn btn-outline-warning mr-auto" type="submit">Continue as guest</button>
-               </form>
+    useEffect(() => {
+        getNews_();
+        getCategories();
+    }, [newsList])
 
 
-            </div>
-         </nav>
+    const handleCategoryChange = evt => {
+        setCategorypolls(evt.target.value)
+    }
 
-         <div id="newslist">
-         </div>
+    const handleChoice = evt => {
+        console.log(evt.target.innerHTML)
+        console.log(evt.target.parentNode)
+    }
 
-         <NewsList list={news} />
+    const getCategories = () => {
+        let categories_ = {
+            business: [],
+            general: [],
+            entertainment: [],
+            sports: [],
+            health: [],
+            science: [],
+            technology: []
+        };
+        API.getHeadlines().then(data => {
+            data.data.sources.map(article => {
+                let cat = article.category;
+                categories_[cat].push({ desc: article.description, url: article.url });
+            })
+            setCategories({ categories: categories_ });
+        })
+    }
 
-         {/* cards will go here */}
-         <Cards list={categories} />
 
-         <Footer></Footer>
 
-      </div>
-   );
+    const getPolls = (param) => {
+        return API.getPolls(param || '').then(
+            (data) => {
+                console.log(data.data.polls)
+                setCatPoll({ catPoll: data.data.polls })
+                console.log(catPoll)
+            }
+        )
+    }
+
+
+    const getNews_ = (param) => {
+        API.getNews(param || '').then(data => {
+            setNews({ news: data.data.articles })
+        })
+    }
+
+
+    const handleClick = (e) => {
+        //e.preventDefault()
+        console.log(e.target.id);
+        getNews_(`&category=${e.target.id}`)
+        setCategorypolls(e.target.id)
+    };
+
+
+
+    return (
+        <div className="App">
+
+            <div className="text-center sticky-top" style={{ color: "black", fontSize: "30px" }}><a className="page-top" href="#">THE WORLD NETWORK  </a> </div>
+
+            {/* signin authentication goes here */}
+            <Form/>
+            
+
+            <Navbar handleClick={handleClick} />
+            <br />
+            <br />
+
+
+            {tech.map(politic => (
+                <Pollscard id={politic.id}
+                    key={politic.id}
+                    name={politic.name}
+                    optionOne={politic.optionOne}
+                    optionTwo={politic.optionTwo}
+                    handleChoice={handleChoice} />
+            ))}
+
+
+            <NewsList list={news} />
+
+            <Cards list={categories} />
+
+            <Footer></Footer>
+
+        </div>
+    );
 }
 
 export default App;

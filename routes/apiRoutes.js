@@ -1,14 +1,19 @@
 const router = require("express").Router();
-const db = require("../models");
+const pollsController = require("../controllers/pollController")
+const db = require("../models")
 
-router.get("/news", (req, res) => {
-  // Use a regular expression to search titles for req.query.q
-  // using case insensitive match. https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
-  db.News.find({
-    title: { $regex: new RegExp(req.query.q, 'i')}
-  })
-    .then(recipes => res.json(recipes))
-    .catch(err => res.status(422).end());
+router.get("/polls/:category", (req, res) => {
+  console.log('route hit')
+  
+db.Categories.find(req.params)
+.then(category => {
+  
+  return res.json(category[0]);
+  
+}).catch(err => {
+  console.log('Error occured')
+  console.log(err);
+});
 });
 
 module.exports = router;
