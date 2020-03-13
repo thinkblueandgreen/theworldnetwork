@@ -12,7 +12,7 @@ import Cards from "./components/Cards";
 import Footer from "./components/Footer";
 
 const App = function () {
-
+    const [currentUser, setCurrentUser] = useState({username:null,id:null})
     const [categorypolls, setCategorypolls] = useState("politics")
     const [catPoll, setCatPoll] = useState({ catPoll: [] })
     const [newsList, setNewsList] = useState({ newsList: [] })
@@ -39,6 +39,10 @@ const App = function () {
         getCategories();
     }, [newsList])
 
+    const changeCurrentUser =(user)=>{
+        console.log(user)
+        setCurrentUser(user)
+    }
 
     const handleCategoryChange = evt => {
         setCategorypolls(evt.target.value)
@@ -100,10 +104,11 @@ const App = function () {
     return (
         <div className="App">
 
-            <div className="text-center sticky-top" style={{ color: "black", fontSize: "30px" }}><a className="page-top" href="#">THE WORLD NETWORK  </a> </div>
+            <div className="text-center sticky-top" style={{ color: "black", fontSize: "30px" }}><a className="page-top" href="#">WELCOME TO THE WORLD NETWORK {currentUser.username || ''}!</a> </div>
 
             {/* signin authentication goes here */}
-            <Form/>
+            <Form changeCurrentUser={changeCurrentUser}/>
+            {/* <Form /> */}
             
 
             <Navbar handleClick={handleClick} />

@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
 
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/pollingapp",
+  process.env.MONGODB_URI || "mongodb://localhost/mathisfunapp",
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
@@ -28,8 +28,9 @@ mongoose.connect(
 //   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 // );
 
-// app.use(passport.initialize())
-// app.use(passport.session()) 
+app.use(passport.initialize())
+app.use(passport.session()) 
+
 
 // Use apiRoutes
 app.use("/api", apiRoutes);

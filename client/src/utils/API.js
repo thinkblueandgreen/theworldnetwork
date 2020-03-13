@@ -11,13 +11,20 @@ export default {
   getHeadlines: function(){
     return axios.get(`http://newsapi.org/v2/sources?apiKey=9d292aa6de19468c902a5695b2d3a89e`)
   },
+
+  //bashar's polling code
   getPolls: function(category){
     return axios.get(`/api/polls/` + category)
   },
+
+  //sary's signin code
   logIn: function(params){
-    return axios.post('/api/login')
+    return axios.post('/api/login', {...params})
   },
   signUp: function(params){
     return axios.post('/api/signup')
+  },
+  logOut: function(){
+ 
   }
 };
