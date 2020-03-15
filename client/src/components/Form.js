@@ -16,16 +16,32 @@ function form(props) {
   const handleShow = () => setShow(true);
 
   const signOut = ()=>{
-    
+    API.logOut().then(data => {
+      console.log(data);
+    });
+    window.location.reload(); 
   }
 
   const signIn =()=>{
     API.logIn({username:username, password:password}).then(user=>{
-      console.log(user)
+      console.log("user object.....L "+JSON.stringify(user));
+      console.log("staaaaaaaaaaaaatus teeeeeeeeextL=: "+user.statusText)
       setLogged(true);
       setShow(false)
       console.log(currentUser)
       props.changeCurrentUser({username:user.data.user.local.username,id:user.data.user._id})
+    })
+  }
+
+  const signUp =()=>{
+    API.signUp({username:username, password:password}).then(user=>{
+      console.log("user object.....L "+JSON.stringify(user));
+      console.log("staaaaaaaaaaaaatus teeeeeeeeextL=: "+user.statusText);
+      
+      //setLogged(true);
+      //setShow(false)
+      console.log(currentUser)
+      //props.changeCurrentUser({username:user.data.user.local.username,id:user.data.user._id})
     })
   }
 
@@ -69,14 +85,12 @@ function form(props) {
           </div>
         </Modal.Body>
 
+
+
         <Modal.Footer>
           <div className="form-group form-check d-flex">
-            {/* <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-            <label className="form-check-label" for="exampleCheck1">Save password</label> */}
             <button type="submit" className="btn btn-primary mr-auto" onClick={signIn} >Login</button>
-            <button type="submit" className="btn btn-secondary ml-auto">Signup</button>
-            
-            
+            <button type="submit" className="btn btn-secondary ml-auto"  onClick={signUp}>Signup</button>   
             
           </div>
         </Modal.Footer>

@@ -22,9 +22,10 @@ export default {
     return axios.post('/api/login', {...params})
   },
   signUp: function(params){
-    return axios.post('/api/signup')
+    return axios.post('/api/signup', {...params})
   },
   logOut: function(){
- 
+    return axios.get('/api/logout')
+    
   }
 };

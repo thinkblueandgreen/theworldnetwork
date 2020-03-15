@@ -20,7 +20,6 @@ mongoose.connect(
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
-
 //Sary's passport code is bellow. 
 
 // mongoose.connect(

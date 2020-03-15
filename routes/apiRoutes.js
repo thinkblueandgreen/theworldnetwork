@@ -29,7 +29,7 @@ router.get("/news", (req, res) => {
 
 
 router.post('/signup', (req, res) => {
-  console.log(req.body)
+  console.log("=================>"+req.body)
 	const { username, password } = req.body
 	// ADD VALIDATION
 	db.User.findOne({ 'local.username': username }, (err, userMatch) => {
@@ -69,8 +69,18 @@ router.post(
 	}
 )
 
-router.post('/logout', function(req,res){
-  passport.logout().then(response=>console.log(response))
+function refreshPage() {
+    window.location.reload(false);
+  }
+
+router.get('/logout', function(req,res){
+	console.log("logged out.......");
+	//passport.logout().then(response=>console.log(response))
+
+  req.logout();
+  res.redirect('/');
+	///res.redirect('/'); //Can fire before session is destroyed?
+
 })
 
 module.exports = router;

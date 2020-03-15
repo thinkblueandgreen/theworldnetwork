@@ -8,7 +8,7 @@ function Card(props) {
     let desc = '';
     let items = '';
     try{
-        console.log("propppppppppppppppppppppppppppppps..."+JSON.stringify(props.mycards[0].desc));
+       // console.log("propppppppppppppppppppppppppppppps..."+JSON.stringify(props.mycards[0].desc));
         desc = props.mycards[0].desc;
         let count=0;
         items = props.mycards.slice(0,5).map((item, key) =>

@@ -106,6 +106,7 @@ const App = function () {
 
             <div className="text-center sticky-top" style={{ color: "black", fontSize: "30px" }}><a className="page-top" href="#">WELCOME TO THE WORLD NETWORK {currentUser.username || ''}!</a> </div>
 
+
             {/* signin authentication goes here */}
             <Form changeCurrentUser={changeCurrentUser}/>
             {/* <Form /> */}
