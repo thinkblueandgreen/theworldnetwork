@@ -84,12 +84,14 @@ const App = function () {
     }
 
 
-    const getNews_ = (param) => {
-        API.getNews(param || '').then(data => {
-            console.log('news', data)
-            setNews({ news: data.data.articles })
-        })
-    }
+    const getNews_ = async(param) => {
+        const news = await API.getNews(param || '')
+        // .then(data => {
+        //     console.log('news', data.json())
+            setNews({ news: news.articles })
+            console.log(news)
+        }
+    
 
 
     const handleClick = (e) => {
