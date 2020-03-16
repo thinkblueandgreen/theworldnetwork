@@ -4,9 +4,10 @@ import axios from "axios";
 // It accepts a "query" or term to search the recipe api for
 export default {
   getNews: function (query) {
-    return axios.get(`
-      https://newsapi.org/v2/top-headlines?country=us${query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e
-     `);
+    // return axios.get(`
+    //   https://newsapi.org/v2/top-headlines?country=us${query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e
+    //  `);
+    return axios.post('/api/news', {query:query})
   },
   getHeadlines: function(){
     return axios.get(`https://newsapi.org/v2/sources?apiKey=9d292aa6de19468c902a5695b2d3a89e`)

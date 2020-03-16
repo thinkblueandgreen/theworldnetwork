@@ -31,7 +31,6 @@ const App = function () {
 
     useEffect(() => {
         getPolls(categorypolls)
-        getNews_()
     }, [categorypolls])
 
     useEffect(() => {
