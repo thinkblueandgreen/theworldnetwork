@@ -21,9 +21,9 @@ db.Categories.find(req.params)
 router.post("/news", ({body}, res) => {
   // Use a regular expression to search titles for req.query.q
   // using case insensitive match. https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
-  axios.get(`
-      https://newsapi.org/v2/top-headlines?country=us${body.query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e
-     `).then(data=>{
+  const url = `https://newsapi.org/v2/top-headlines?country=us${body.query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e`
+  console.log(url)
+  axios.get(url).then(data=>{
 		res.json(data.data)
 		}).catch(err=>console.log(err))
 });
