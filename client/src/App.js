@@ -87,6 +87,7 @@ const App = function () {
 
     const getNews_ = (param) => {
         API.getNews(param || '').then(data => {
+            console.log('news', data)
             setNews({ news: data.data.articles })
         })
     }
