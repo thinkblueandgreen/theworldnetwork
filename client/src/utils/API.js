@@ -30,3 +30,4 @@ export default {
     return axios.get('/api/logout')
   }
 };
+

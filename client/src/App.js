@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/Navbar.js";
 import Form from './components/Form';
+import Coronomap from './components/Coronomap';
 import API from "./utils/API";
 import Pollscard from "./components/Pollscard";
 import NewsList from "./components/Newslist";
@@ -112,13 +113,16 @@ const App = function () {
     return (
         <div className="App">
 
-            <div className="text-center sticky-top" style={{color: "white", fontSize: "30px", backgroundColor: "darkred", fontFamily: "'Playfair Display', serif"}}><a className="page-top" href="#">WELCOME TO THE WORLD NETWORK</a> 
-            <div className="text-center" style={{color: "white", fontSize: "20px", backgroundColor: "darkred", fontFamily: "'Josefin Slab', serif"}}> News You Can Use {currentUser.username || ""}! </div>
+            <div className="text-center sticky-top" style={{color: "white", fontSize: "30px", backgroundColor: "darkred", fontFamily: "'Playfair Display', serif"}}>
+                <a className="page-top" href="#">WELCOME TO THE WORLD NETWORK</a> 
+                <div className="text-center" style={{color: "white", fontSize: "20px", backgroundColor: "darkred", fontFamily: "'Josefin Slab', serif"}}> News You Can Use {currentUser.username || ""}! </div>
+                <div className="text-center" style={{color: "white", fontSize: "15px", backgroundColor: "darkred", fontFamily: "italics, 'Josefin Slab', serif"}}><a href="https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6" target="_blank">find you corono updates here</a></div>
             </div>
 
             <div style={{color: "white", fontSize: "30px", backgroundColor: "darkred", fontFamily: "'Playfair Display', serif"}}>
 
-            <Form className="d-flex mr-auto"changeCurrentUser={changeCurrentUser}/>
+            <Form className="d-flex mr-auto"changeCurrentUser={changeCurrentUser}></Form>
+            
             </div>
 
             <Navbar handleClick={handleClick} />

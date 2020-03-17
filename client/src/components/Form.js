@@ -44,33 +44,28 @@ function form(props) {
     })
   }
 
-
-
   const handleInputChange =(e)=>{
     e.target.name === 'username'? setUsername(e.target.value) : setPassword(e.target.value)
-
   }
 
   return (
 
-
     <div id='modal-test'>
-      {logged? <button type="button" class="btn btn-warning"  onClick={signOut}>
+
+      {logged ? <button type="button" class="btn btn-warning" onClick={signOut}>
         Sign Out
       </button> :
-      <button type="button" class="btn btn-secondary" onClick={handleShow}>
-        Sign in
+        <button type="button" class="btn btn-secondary" onClick={handleShow}>
+          Sign in
       </button>
-}
-      
-      
-      <Modal show={show} onHide={handleClose}>
+      }
+      {/* <embed className='map' src='https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6'/> */}
 
+
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Sign in</Modal.Title>
         </Modal.Header>
-
-
         <Modal.Body>
           <div>
             <div className="form-group">
@@ -83,9 +78,6 @@ function form(props) {
             </div>
           </div>
         </Modal.Body>
-
-
-
         <Modal.Footer>
           <div className="form-group form-check d-flex">
             <button type="submit" className="btn btn-primary mr-auto" onClick={signIn} >Login</button>
