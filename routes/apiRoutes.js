@@ -2,20 +2,66 @@ const router = require("express").Router();
 const pollsController = require("../controllers/pollController")
 const db = require("../models");
 const passport = require('../passport')
+const { exec } = require("child_process");
+const seedDb = require('../scripts/category.js');
 
 router.get("/polls/:category", (req, res) => {
-  console.log('route hit')
+	console.log('route hit')
+	console.log(req.params)
+	let { category } =req.params
+	console.log(category)
+	
+  db.Categories.find(req.params)
+  .then(category => {
+	console.log(category[0].polls)
+	return res.json(category[0]);
+	
+  }).catch(err => {
+	console.log('Error occured')
+	console.log(err);
+  });
+  });
   
-db.Categories.find(req.params)
-.then(category => {
+  router.post("/vote", (req, res) => {
+	console.log("my git")
+	console.log( req.body.body[0].voteid)
+	var vote = req.body.body[0].voteid
+	// db.Polls.findOne({category: "science","id": req.body.body[1].queid})
+	// .then(choice => {
+	//   console.log("return lol" + choice)
+	 
+	//   return res.json(choice);
+	 
+	  
+	// }).catch(err => {
+	//   console.log('Error occured')
+	//   console.log(err);
+	// });
+	
+	 console.log(vote)
   
-  return res.json(category[0]);
+	 if ( vote == "votetwo"){
+	
+	 db.Polls.findOneAndUpdate({category: "science","id": req.body.body[1].queid}, { $inc: {votetwo: 1}}, {new: true },function(err, response) {
+	  if (err) {
+	  console.log(err);
+	 } else {
+	  console.log(response);
+	 } 
+	 
+	});
+  } else {
+	db.Polls.findOneAndUpdate({category: "science","id": req.body.body[1].queid}, { $inc: {voteone: 1}}, {new: true },function(err, response) {
+	  if (err) {
+	  console.log(err);
+	 } else {
+	  console.log(response);
+	 } 
+	 
+	});
   
-}).catch(err => {
-  console.log('Error occured')
-  console.log(err);
-});
-});
+  }
+  });
 
 router.get("/news", (req, res) => {
   // Use a regular expression to search titles for req.query.q
@@ -82,5 +128,15 @@ router.get('/logout', function(req,res){
 	///res.redirect('/'); //Can fire before session is destroyed?
 
 })
+
+router.get('/setup/db', (req, res) => {
+	try {
+	  seedDb();
+	  res.sendStatus(200);
+	}
+	catch(err){
+	  res.json(err);
+	}
+	});
 
 module.exports = router;

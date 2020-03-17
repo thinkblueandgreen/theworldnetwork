@@ -35,12 +35,18 @@ const App = function () {
         console.log(queId)
     }
 
+    useEffect(() => {
+        upDate(queId)
+
+    },[queId])
+
     const upDate = (param) => {
+
+    
         API.pollVote(param).then(data => {
             console.log("hello" + data)
         })
     }
-
     const handleCategoryChange = evt => {
         setCategory(evt.target.value)
     }
@@ -50,12 +56,11 @@ const App = function () {
     }
 
     useEffect(() => {
-        upDate(queId)
-    },[queId])
-
-    useEffect(() => {
+        
         getPolls(category)
         console.log("catagodskg" + category)
+        
+
     }, [category])
 
     useEffect(() => {
@@ -64,21 +69,6 @@ const App = function () {
     }, [newsList])
 
 
-    const getPolls = (param) => {
-        return API.getPolls(param || '').then(
-            (data) => {
-                console.log(data.data.polls)
-                setCatPoll({ catPoll: data.data.polls })
-                console.log(catPoll)
-            }
-        )
-    }
-
-    const getNews_ = (param) => {
-        API.getNews(param || '').then(data => {
-            setNews({ news: data.data.articles })
-        })
-    }
 
     const getCategories = () => {
         let categories_ = {
@@ -100,6 +90,25 @@ const App = function () {
     }
 
 
+
+    const getPolls = (param) => {
+        return API.getPolls(param || '').then(
+            (data) => {
+                console.log(data.data.polls)
+                setCatPoll({ catPoll: data.data.polls })
+                console.log(catPoll)
+            }
+        )
+    }
+
+
+    const getNews_ = (param) => {
+        API.getNews(param || '').then(data => {
+            setNews({ news: data.data.articles })
+        })
+    }
+
+
     const handleClick = (e) => {
         //e.preventDefault()
         console.log(e.target.id);
@@ -107,6 +116,7 @@ const App = function () {
         setCategory(e.target.id);
         console.log(e.target.id);
     };
+
 
 
     return (
@@ -143,3 +153,7 @@ const App = function () {
 }
 
 export default App;
+
+
+
+

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import ReactDOM from 'react-dom';
-//import Modal from 'react-modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal } from 'react-bootstrap';
 import API from '../utils/API'
@@ -33,15 +31,16 @@ function form(props) {
     })
   }
 
+  const cancel = () => {
+    setShow(false);
+  };
+
   const signUp =()=>{
     API.signUp({username:username, password:password}).then(user=>{
       console.log("user object.....L "+JSON.stringify(user));
       console.log("staaaaaaaaaaaaatus teeeeeeeeextL=: "+user.statusText);
-      
-      //setLogged(true);
-      //setShow(false)
       console.log(currentUser)
-      //props.changeCurrentUser({username:user.data.user.local.username,id:user.data.user._id})
+      alert("You're signed up");
     })
   }
 
@@ -56,12 +55,12 @@ function form(props) {
 
 
     <div id='modal-test'>
-      {logged? <Button variant='primary' onClick={signOut}>
+      {logged? <button type="button" class="btn btn-warning"  onClick={signOut}>
         Sign Out
-      </Button> :
-      <Button variant="primary" onClick={handleShow}>
+      </button> :
+      <button type="button" class="btn btn-secondary" onClick={handleShow}>
         Sign in
-      </Button>
+      </button>
 }
       
       
@@ -91,7 +90,11 @@ function form(props) {
           <div className="form-group form-check d-flex">
             <button type="submit" className="btn btn-primary mr-auto" onClick={signIn} >Login</button>
             <button type="submit" className="btn btn-secondary ml-auto"  onClick={signUp}>Signup</button>   
-            
+            <button
+              type="submit" className="btn btn-secondary ml-auto" onClick={cancel}
+            >
+              Cancel
+            </button>
           </div>
         </Modal.Footer>
 

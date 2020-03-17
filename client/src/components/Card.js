@@ -16,18 +16,6 @@ function Card(props) {
         );
     }catch(e){}
 
-
-    /*getHeadlines = (props)=>{
-        const categories = this.state.categories;
-        API.getHeadlines().then(data=>{
-           data.data.sources.map(article=>{
-              let cat = article.category;
-              categories[cat].push({desc:article.description, url:article.url})
-           })
-           this.setState({categories:categories})
-        }) 
-     } */
-
     return (
         <div className="card text-center">
 
@@ -35,11 +23,8 @@ function Card(props) {
                 <img src= {props.imgsrc} alt="image 1" className="card-img-top"/>
             </div>
             <div className= "card-body text-dark">
-                <h4 className="card-title">{props.title}</h4>
-                {/* <p className="card-text text-secondary"> {desc}  </p> */}
-                {/* <button type="button" className="btn btn-link">Read More</button> */}
+                <h4 className="card-title" style={{ fontFamily: "'Playfair Display', serif", colort: "grey" }}>{props.title}</h4>
                 <ul>{items}</ul>
-
             </div>
 
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import "./card-style.css";
 
 const Newslistitem = ({ news }) => {
 
@@ -10,16 +10,20 @@ const Newslistitem = ({ news }) => {
   const [profileState, setProfileState] = useState(news);
 
   return (
-  <div className="news" className="container-fluid">
-
-    <div className="card " >
-      <img src={news.urlToImage} className="card-img-top" alt="image" size=""></img>
-      <div className="card-title">
-      </div>
+    <div className="news" className="container-fluid">
+    <div className="card ">
+      <img
+        src={news.urlToImage}
+        className="card-img-top"
+        alt="image"
+        size=""
+      ></img>
       <div className="card-body">
-        <h5 className="card-title">{news.title}</h5>
-        <p className="card-text">{news.content }</p>
-        <a  className="card-text"  href={news.url} target="_blank">Read More</a>
+        <h6 className="card-text">{news.title}</h6>
+        <p className="card-text">{news.content}</p>
+        <a className="card-text" href={news.url} target="_blank">
+          Read More
+        </a>
       </div>
     </div>
   </div>

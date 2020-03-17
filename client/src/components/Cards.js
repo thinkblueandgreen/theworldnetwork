@@ -12,25 +12,25 @@ function Cards(props) {
     return(
 <div className="container-fluid d-flex justify-content-center">
     <div className="row">
-        <div className="col-md-3">
+        <div className="col-md-4">
         <Card imgsrc={img1} title="Technology" mycards={props.list.categories.technology}/>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
         <Card imgsrc={img2} title="Sports" mycards={props.list.categories.sports}/>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
         <Card imgsrc={img3} title="Science" mycards={props.list.categories.science} />
         </div>
-        <div className="col-md-3">
+        {/* <div className="col-md-4">
         <Card imgsrc={img1} title="General" mycards={props.list.categories.general}/>
-        </div>
-        <div className="col-md-3">
+        </div> */}
+        <div className="col-md-4">
         <Card imgsrc={img2} title="Health" mycards={props.list.categories.health}/>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
         <Card imgsrc={img2} title="Business" mycards={props.list.categories.business}/>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-4">
         <Card imgsrc={img3} title="Entertainment"  mycards={props.list.categories.entertainment}/>
         </div>
     </div>

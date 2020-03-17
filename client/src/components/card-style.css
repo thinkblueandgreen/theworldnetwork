@@ -1,24 +1,29 @@
-body{
+body {
     background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
-}
-
-.card{
+  }
+  
+  .card {
     width: 20rem;
-}
-
-.card:hover{
-    box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253)!important;
-}
-
-.card-body{
+    length: 80rem;
+    margin-bottom: 30px;
+    margin-left: 50px;
+  }
+  
+  .card:hover {
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
+  }
+  
+  .card-body {
     padding: 3rem 0 !important;
-}
-
-.card-text{
+    cursor: pointer;
+  }
+  
+  .card-text {
     font-size: 0.9rem;
     padding: 0.4rem 1.9rem;
-}
-
-.container-fluid{
+  }
+  
+  .container-fluid {
     padding-top: 6rem;
-}
+  }
+  

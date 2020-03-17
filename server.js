@@ -20,13 +20,6 @@ mongoose.connect(
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
-//Sary's passport code is bellow. 
-
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost/reactnews",
-//   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-// );
-
 app.use(passport.initialize())
 app.use(passport.session()) 
 
