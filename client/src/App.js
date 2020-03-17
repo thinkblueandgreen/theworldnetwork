@@ -31,6 +31,7 @@ const App = function () {
 
     useEffect(() => {
         getPolls(categorypolls)
+        getNews_()
     }, [categorypolls])
 
     useEffect(() => {
@@ -84,14 +85,11 @@ const App = function () {
     }
 
 
-    const getNews_ = async(param) => {
-        const news = await API.getNews(param || '')
-        // .then(data => {
-        //     console.log('news', data.json())
-            setNews({ news: news.articles })
-            console.log(news)
-        }
-    
+    const getNews_ = (param) => {
+        API.getNews(param || '').then(data => {
+            setNews({ news: data.data.articles })
+        })
+    }
 
 
     const handleClick = (e) => {

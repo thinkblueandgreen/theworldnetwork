@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const pollsController = require("../controllers/pollController")
 const db = require("../models");
-const passport = require('../passport');
-const axios = require('axios')
+const passport = require('../passport')
 
 router.get("/polls/:category", (req, res) => {
   console.log('route hit')
@@ -18,14 +17,14 @@ db.Categories.find(req.params)
 });
 });
 
-router.post("/news", ({body}, res) => {
+router.get("/news", (req, res) => {
   // Use a regular expression to search titles for req.query.q
   // using case insensitive match. https://docs.mongodb.com/manual/reference/operator/query/regex/index.html
-  const url = `https://newsapi.org/v2/top-headlines?country=us${body.query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e`
-  console.log(url)
-  axios.get(url).then(data=>{
-		res.json(data.data)
-		}).catch(err=>console.log(err))
+  db.News.find({
+    title: { $regex: new RegExp(req.query.q, 'i')}
+  })
+    .then(recipes => res.json(recipes))
+    .catch(err => res.status(422).end());
 });
 
 

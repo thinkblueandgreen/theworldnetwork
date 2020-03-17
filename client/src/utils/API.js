@@ -3,16 +3,13 @@ import axios from "axios";
 // The getRecipes method retrieves recipes from the server
 // It accepts a "query" or term to search the recipe api for
 export default {
-  getNews: async function (query) {
-    const data = await fetch(`
-      https://newsapi.org/v2/top-headlines?country=us${query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e
+  getNews: function (query) {
+    return axios.get(`
+      http://newsapi.org/v2/top-headlines?country=us${query}&pageSize=100&apiKey=9d292aa6de19468c902a5695b2d3a89e
      `);
-    const datajson = await data.json();
-    return datajson
-    // return axios.post('/api/news', {query:query})
   },
   getHeadlines: function(){
-    return axios.get(`https://newsapi.org/v2/sources?apiKey=9d292aa6de19468c902a5695b2d3a89e`)
+    return axios.get(`http://newsapi.org/v2/sources?apiKey=9d292aa6de19468c902a5695b2d3a89e`)
   },
 
   //bashar's polling code
